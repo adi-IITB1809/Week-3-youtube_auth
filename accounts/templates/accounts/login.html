@@ -1,0 +1,37 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h1 class="mb-4">Login</h1>
+
+  <form method="POST">
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+      <div class="alert alert-danger">
+        {{ form.non_field_errors }}
+      </div>
+    {% endif %}
+
+    <div class="mb-3">
+      {{ form.username.label_tag }}
+      <input type="text" name="username" class="form-control" id="id_username" required>
+      {% for error in form.username.errors %}
+        <div class="text-danger">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="mb-3">
+      {{ form.password.label_tag }}
+      <input type="password" name="password" class="form-control" id="id_password" required>
+      {% for error in form.password.errors %}
+        <div class="text-danger">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <button type="submit" class="btn btn-success">Login</button>
+  </form>
+</div>
+{% endblock %}
